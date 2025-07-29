@@ -3,560 +3,969 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我们的恋爱年度报告 | 2023-2024</title>
+    <title>2024恋爱年度报告</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-            color: #333;
+            font-family: 'ZCOOL QingKe HuangYou', sans-serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0, #a1c4fd, #c2e9fb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #5a3e36;
             overflow-x: hidden;
-            line-height: 1.6;
-        }
-        
-        .page {
-            width: 100%;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
-            position: relative;
-            overflow: hidden;
         }
-        
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .container {
-            max-width: 450px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             position: relative;
-            margin: 20px auto;
             padding: 20px;
         }
-        
-        .heart-bg {
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to right, #ff7eb3, #ff758c);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.05;
-            z-index: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="%23ff6b6b"/></svg>');
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q40,5 50,30 T80,20" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/></svg>');
+            opacity: 0.3;
         }
-        
-        header {
-            text-align: center;
-            padding: 30px 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .logo {
-            font-size: 24px;
-            color: #ff6b6b;
+
+        .header h1 {
+            font-size: 2.8rem;
             margin-bottom: 15px;
+            font-family: 'Ma Shan Zheng', cursive;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 3px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .section {
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(255, 250, 245, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #ffafbd;
+            color: #e84393;
+            font-size: 1.8rem;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+
+        .section-title i {
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+        }
+
+        .card h3 {
+            color: #e84393;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h3 i {
+            margin-right: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .highlight {
+            color: #e84393;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 20px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #ffafbd, #a1c4fd);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff758c;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #ff758c;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #e84393;
+            margin-bottom: 5px;
+        }
+
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            min-width: 160px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e84393;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .photo-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 120px;
+            background: #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-        }
-        
-        .couple-names {
-            font-size: 32px;
-            font-weight: 700;
-            margin: 20px 0;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-        
-        h1 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            text-align: center;
-        }
-        
-        .subtitle {
-            font-size: 18px;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .report-section {
-            margin: 40px 0;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .section-title {
-            font-size: 22px;
-            color: #ff6b6b;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ffd9d9;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .data-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
-            position: relative;
-            overflow: hidden;
+            cursor: pointer;
             transition: transform 0.3s ease;
         }
-        
-        .data-card:hover {
-            transform: translateY(-5px);
+
+        .photo-item:hover {
+            transform: scale(1.05);
         }
-        
-        .data-card h3 {
-            font-size: 18px;
-            color: #3498db;
-            margin-bottom: 15px;
-            display: flex;
+
+        .photo-item i {
+            font-size: 2rem;
+            color: #ccc;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
         }
-        
-        .big-number {
-            font-size: 48px;
-            font-weight: 700;
-            color: #ff6b6b;
-            text-align: center;
-            margin: 15px 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
         }
-        
-        .number-label {
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 16px;
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
         }
-        
-        .memories {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+
+        .wish-wall {
+            display: flex;
+            flex-wrap: wrap;
             gap: 15px;
             margin-top: 20px;
         }
-        
-        .memory-item {
-            background: #f8f9fa;
-            border-radius: 12px;
+
+        .wish-card {
+            background: white;
+            border-radius: 10px;
             padding: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 200px;
+            border-left: 4px solid #ffafbd;
         }
-        
-        .memory-item:hover {
-            background: #fff5f5;
-            transform: scale(1.03);
-        }
-        
-        .memory-icon {
-            font-size: 24px;
-            color: #ff6b6b;
-            margin-bottom: 10px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background: #ecf0f1;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 15px 0;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff9a9e, #fad0c4);
-            border-radius: 5px;
-        }
-        
-        .map-container {
-            height: 180px;
-            background: #e0f7fa;
-            border-radius: 12px;
-            margin: 20px 0;
-            position: relative;
-            overflow: hidden;
+
+        .keyword-cloud {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
             justify-content: center;
-            color: #00838f;
-            font-weight: bold;
+            margin-top: 20px;
         }
-        
-        .quote {
-            font-style: italic;
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            margin: 30px 0;
-            position: relative;
-            border-left: 4px solid #ff6b6b;
-        }
-        
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid #ffd9d9;
-            margin: 0 auto;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            color: white;
-        }
-        
-        .avatars {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 30px 0;
-        }
-        
-        .final-message {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #fff5f5, #fff);
+
+        .keyword {
+            padding: 8px 15px;
+            background: rgba(255, 175, 189, 0.2);
             border-radius: 20px;
-            margin: 20px 0;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: default;
         }
-        
-        .btn {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+
+        .keyword:hover {
+            background: rgba(255, 175, 189, 0.4);
+            transform: scale(1.1);
+        }
+
+        .keyword-large {
+            font-size: 1.5rem;
+        }
+
+        .keyword-medium {
+            font-size: 1.2rem;
+        }
+
+        .progress-container {
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 20px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            line-height: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #777;
+            font-size: 1.1rem;
+        }
+
+        .share-btn {
+            background: linear-gradient(to right, #ff7eb3, #ff758c);
             color: white;
             border: none;
-            padding: 14px 30px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 500;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 30px;
             cursor: pointer;
+            margin-top: 20px;
             transition: all 0.3s ease;
-            display: block;
-            margin: 30px auto;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 126, 179, 0.4);
         }
-        
-        .btn:hover {
+
+        .share-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 126, 179, 0.6);
         }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #95a5a6;
-            font-size: 14px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .floating-heart {
-            position: absolute;
-            color: rgba(255, 107, 107, 0.3);
-            font-size: 24px;
-            animation: float 6s infinite ease-in-out;
-            z-index: 1;
-        }
-        
+
         @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-            25% { transform: translateY(-20px) translateX(10px) rotate(10deg); }
-            50% { transform: translateY(-10px) translateX(-10px) rotate(-10deg); }
-            75% { transform: translateY(-15px) translateX(15px) rotate(5deg); }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+            100% { transform: translateY(-40px) rotate(360deg); opacity: 0; }
         }
-        
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #ff6b6b;
-            opacity: 0;
-            z-index: 1000;
-            animation: confetti-fall 5s linear forwards;
-        }
-        
-        @keyframes confetti-fall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                border-radius: 15px;
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section {
                 padding: 15px;
             }
-            
-            .couple-names {
-                font-size: 26px;
-            }
-            
-            h1 {
-                font-size: 24px;
-            }
-            
-            .big-number {
-                font-size: 36px;
+
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
-    <div class="page">
-        <!-- Floating hearts background -->
-        <div class="heart-bg"></div>
-        
-        <!-- Floating hearts -->
-        <div class="floating-heart" style="top: 10%; left: 15%;">❤</div>
-        <div class="floating-heart" style="top: 25%; left: 80%;">❤</div>
-        <div class="floating-heart" style="top: 65%; left: 10%;">❤</div>
-        <div class="floating-heart" style="top: 80%; left: 75%;">❤</div>
-        <div class="floating-heart" style="top: 40%; left: 50%;">❤</div>
-        
-        <div class="container">
-            <header>
-                <div class="logo">
-                    <i class="fas fa-heart"></i>
-                    <span>恋爱年度报告</span>
-                </div>
-                <div class="couple-names">张伟 & 李芳</div>
-                <h1>2023-2024 恋爱年度报告</h1>
-                <p class="subtitle">一起走过的365天，都是我们的美好回忆</p>
-            </header>
-            
-            <div class="report-section">
-                <h2 class="section-title"><i class="fas fa-calendar-alt"></i> 相遇时光</h2>
-                <div class="data-card">
-                    <h3><i class="far fa-clock"></i> 在一起时长</h3>
-                    <div class="big-number">365</div>
-                    <div class="number-label">天</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%"></div>
+    <!-- 漂浮的心形背景 -->
+    <div id="hearts-container"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>2024 恋爱年度报告</h1>
+            <p>时光如诗，爱意如歌。这一年，我们共同编织了无数美好的回忆</p>
+        </div>
+
+        <!-- 基础信息 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-heart"></i>
+                <h2>我们的爱情档案</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fas fa-calendar-alt"></i> 恋爱日记</h3>
+                    <div class="info-item">
+                        <span>开始日期：</span>
+                        <span class="highlight">2023年2月14日</span>
                     </div>
-                    <p style="text-align: center; margin-top: 15px; color: #7f8c8d;">2023年6月15日 - 2024年6月15日</p>
+                    <div class="info-item">
+                        <span>在一起的天数：</span>
+                        <span class="highlight">520天</span>
+                    </div>
+                    <div class="info-item">
+                        <span>相识地点：</span>
+                        <span class="highlight">上海外滩</span>
+                    </div>
+                    <div class="info-item">
+                        <span>爱情坐标：</span>
+                        <span class="highlight">(31.2304°N, 121.4737°E)</span>
+                    </div>
                 </div>
-                
-                <div class="data-card">
-                    <h3><i class="fas fa-hand-holding-heart"></i> 我们的纪念日</h3>
-                    <div class="memories">
-                        <div class="memory-item">
-                            <div class="memory-icon"><i class="fas fa-glass-cheers"></i></div>
-                            <div>初次相遇</div>
-                            <div class="number-label">2023.03.12</div>
+
+                <div class="card">
+                    <h3><i class="fas fa-signature"></i> 甜蜜昵称</h3>
+                    <div class="info-item">
+                        <span>你叫TA：</span>
+                        <span class="highlight">宝贝、小笨蛋、亲爱的</span>
+                    </div>
+                    <div class="info-item">
+                        <span>TA叫你：</span>
+                        <span class="highlight">宝宝、猪猪、小可爱</span>
+                    </div>
+                    <div class="info-item">
+                        <span>专属称呼：</span>
+                        <span class="highlight">星月组合</span>
+                    </div>
+                    <div class="info-item">
+                        <span>最爱称呼：</span>
+                        <span class="highlight">宝贝（使用328次）</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 时间轴 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-history"></i>
+                <h2>时光记忆轴</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2023年2月14日</div>
+                    <div>情人节初次相遇，在外滩的咖啡厅</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023年3月20日</div>
+                    <div>第一次正式约会，一起看樱花</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023年5月20日</div>
+                    <div>你鼓起勇气表白，我们正式在一起</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023年7月15日</div>
+                    <div>第一次旅行：浪漫的三亚之旅</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023年10月1日</div>
+                    <div>第一次见对方父母</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2024年1月1日</div>
+                    <div>一起跨年，在烟花下拥吻</div>
+                </div>
+            </div>
+
+            <div class="grid" style="margin-top:30px">
+                <div class="card">
+                    <h3><i class="fas fa-comments"></i> 聊天高峰日</h3>
+                    <div class="info-item">
+                        <span>1. 2023年8月15日</span>
+                        <span class="highlight">623条</span>
+                    </div>
+                    <div class="info-item">
+                        <span>2. 2023年12月24日</span>
+                        <span class="highlight">587条</span>
+                    </div>
+                    <div class="info-item">
+                        <span>3. 2024年2月14日</span>
+                        <span class="highlight">556条</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-heartbeat"></i> 爱的挑战</h3>
+                    <div class="info-item">
+                        <span>第一次吵架：</span>
+                        <span class="highlight">2023年6月10日</span>
+                    </div>
+                    <div class="info-item">
+                        <span>和好时间：</span>
+                        <span class="highlight">3小时28分钟后</span>
+                    </div>
+                    <div class="info-item">
+                        <span>和解方式：</span>
+                        <span class="highlight">你主动道歉 + 冰淇淋</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据统计 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-chart-line"></i>
+                <h2>爱的数据统计</h2>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-comment-dots fa-2x"></i>
+                    <div class="stat-number">86,420</div>
+                    <div class="stat-label">聊天总条数</div>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-phone-alt fa-2x"></i>
+                    <div class="stat-number">1,248</div>
+                    <div class="stat-label">通话总时长(小时)</div>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check fa-2x"></i>
+                    <div class="stat-number">156</div>
+                    <div class="stat-label">约会次数</div>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-map-marked-alt fa-2x"></i>
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">旅行城市数</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="monthlyChart"></canvas>
+            </div>
+
+            <div class="grid" style="margin-top:30px">
+                <div class="card">
+                    <h3><i class="far fa-smile"></i> 表情包统计</h3>
+                    <div class="info-item">
+                        <span>发送表情总数：</span>
+                        <span class="highlight">15,826个</span>
+                    </div>
+                    <div class="info-item">
+                        <span>你最爱的表情：</span>
+                        <span class="highlight">😘（发送1,245次）</span>
+                    </div>
+                    <div class="info-item">
+                        <span>TA最爱的表情：</span>
+                        <span class="highlight">🤣（发送1,087次）</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-gift"></i> 礼物与惊喜</h3>
+                    <div class="info-item">
+                        <span>互赠礼物：</span>
+                        <span class="highlight">38次</span>
+                    </div>
+                    <div class="info-item">
+                        <span>准备惊喜：</span>
+                        <span class="highlight">22次</span>
+                    </div>
+                    <div class="info-item">
+                        <span>最感动礼物：</span>
+                        <span class="highlight">手写情书（2023.12.24）</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 情感分析 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-brain"></i>
+                <h2>情感分析报告</h2>
+            </div>
+
+            <div class="keyword-cloud">
+                <div class="keyword keyword-large">陪伴</div>
+                <div class="keyword keyword-medium">信任</div>
+                <div class="keyword keyword-large">理解</div>
+                <div class="keyword">默契</div>
+                <div class="keyword keyword-medium">温暖</div>
+                <div class="keyword">成长</div>
+                <div class="keyword keyword-large">包容</div>
+                <div class="keyword">支持</div>
+                <div class="keyword keyword-medium">浪漫</div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fas fa-heart"></i> 甜蜜指数</h3>
+                    <div style="text-align:center; font-size:2.5rem; color:#ff758c; margin:15px 0">96%</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width:96%">96%</div>
+                    </div>
+                    <div style="margin-top:15px; text-align:center">
+                        超过99%的情侣！你们的爱情像蜜糖一样甜蜜
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-hands-helping"></i> 相处模式</h3>
+                    <div style="margin:15px 0">
+                        <div>互补指数：92%</div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width:92%"></div>
                         </div>
-                        <div class="memory-item">
-                            <div class="memory-icon"><i class="fas fa-heart"></i></div>
-                            <div>确定关系</div>
-                            <div class="number-label">2023.06.15</div>
+                    </div>
+                    <div style="margin:15px 0">
+                        <div>默契程度：88%</div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width:88%"></div>
                         </div>
-                        <div class="memory-item">
-                            <div class="memory-icon"><i class="fas fa-plane"></i></div>
-                            <div>第一次旅行</div>
-                            <div class="number-label">2023.09.20</div>
-                        </div>
-                        <div class="memory-item">
-                            <div class="memory-icon"><i class="fas fa-home"></i></div>
-                            <div>同居纪念日</div>
-                            <div class="number-label">2024.02.14</div>
+                    </div>
+                    <div style="margin:15px 0">
+                        <div>依赖程度：85%</div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width:85%"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="report-section">
-                <h2 class="section-title"><i class="fas fa-exchange-alt"></i> 恋爱互动</h2>
-                <div class="data-card">
-                    <h3><i class="fas fa-comments"></i> 聊天记录</h3>
-                    <div class="big-number">48,652</div>
-                    <div class="number-label">条消息</div>
-                    <p style="text-align: center; margin-top: 15px; color: #7f8c8d;">相当于2本《小王子》的字数</p>
-                </div>
-                
-                <div class="data-card">
-                    <h3><i class="fas fa-phone-alt"></i> 通话时长</h3>
-                    <div class="big-number">386</div>
-                    <div class="number-label">小时</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 75%"></div>
+
+            <div class="card" style="margin-top:20px">
+                <h3><i class="fas fa-user-astronaut"></i> 在TA心中的角色</h3>
+                <div class="grid">
+                    <div style="text-align:center">
+                        <i class="fas fa-shield-alt fa-3x" style="color:#ffafbd"></i>
+                        <h4 style="margin:10px 0">安全感来源</h4>
+                        <div>"和你在一起，我无所畏惧"</div>
                     </div>
-                    <p style="text-align: center; margin-top: 15px; color: #7f8c8d;">最长通话记录：8小时24分钟</p>
-                </div>
-            </div>
-            
-            <div class="report-section">
-                <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> 共同足迹</h2>
-                <div class="data-card">
-                    <h3><i class="fas fa-shoe-prints"></i> 一起去过的地方</h3>
-                    <div class="big-number">9</div>
-                    <div class="number-label">座城市</div>
-                    <div class="map-container">
-                        <i class="fas fa-map-marked-alt" style="font-size: 48px; margin-right: 15px;"></i>
-                        <div>上海 · 杭州 · 苏州<br>南京 · 厦门 · 青岛<br>北京 · 广州 · 深圳</div>
+                    <div style="text-align:center">
+                        <i class="fas fa-moon fa-3x" style="color:#a1c4fd"></i>
+                        <h4 style="margin:10px 0">灵魂伴侣</h4>
+                        <div>"我们懂彼此未说出口的话"</div>
+                    </div>
+                    <div style="text-align:center">
+                        <i class="fas fa-sun fa-3x" style="color:#ffc3a0"></i>
+                        <h4 style="margin:10px 0">快乐源泉</h4>
+                        <div>"你的笑容是我最大的幸福"</div>
                     </div>
                 </div>
-                
-                <div class="data-card">
-                    <h3><i class="fas fa-utensils"></i> 共同用餐</h3>
-                    <div class="big-number">278</div>
-                    <div class="number-label">次</div>
-                    <p style="text-align: center; margin-top: 15px; color: #7f8c8d;">最常去的餐厅：转角那家川菜馆</p>
-                </div>
             </div>
-            
-            <div class="report-section">
-                <h2 class="section-title"><i class="fas fa-film"></i> 回忆瞬间</h2>
-                <div class="data-card">
-                    <h3><i class="fas fa-camera"></i> 共同照片</h3>
-                    <div class="big-number">1,243</div>
-                    <div class="number-label">张甜蜜合影</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 85%"></div>
+        </div>
+
+        <!-- 特别项目 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-star"></i>
+                <h2>专属记忆珍藏</h2>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3><i class="fas fa-clipboard-list"></i> 心愿清单</h3>
+                    <div class="info-item">
+                        <span>一起看日出</span>
+                        <span class="highlight">✅ 已完成</span>
                     </div>
-                    <p style="text-align: center; margin-top: 15px; color: #7f8c8d;">最爱的照片：厦门海边日落</p>
+                    <div class="info-item">
+                        <span>海边放烟花</span>
+                        <span class="highlight">✅ 已完成</span>
+                    </div>
+                    <div class="info-item">
+                        <span>学习双人舞</span>
+                        <span class="highlight">🕒 进行中</span>
+                    </div>
+                    <div class="info-item">
+                        <span>养一只宠物</span>
+                        <span class="highlight">⏳ 待完成</span>
+                    </div>
+                    <div class="info-item">
+                        <span>一起坐摩天轮</span>
+                        <span class="highlight">✅ 已完成</span>
+                    </div>
                 </div>
-                
-                <div class="quote">
-                    <i class="fas fa-quote-left" style="color: #ff6b6b; font-size: 24px;"></i>
-                    <p style="margin: 15px 0;">和你在一起的每一天，都像是情人节。你的笑容是我每天最期待的风景，你的陪伴是我生命中最珍贵的礼物。</p>
-                    <p style="text-align: right; font-weight: 500;">—— 张伟 & 李芳</p>
+
+                <div class="card">
+                    <h3><i class="fas fa-music"></i> 专属BGM</h3>
+                    <div style="text-align:center; margin:20px 0">
+                        <i class="fas fa-music fa-3x" style="color:#ff758c"></i>
+                        <h4 style="margin:15px 0">《慢慢喜欢你》</h4>
+                        <div>莫文蔚</div>
+                        <div style="margin-top:15px; color:#777">"书里总爱写到喜出望外的傍晚..."</div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="report-section">
-                <h2 class="section-title"><i class="fas fa-gift"></i> 特别时刻</h2>
-                <div class="avatars">
-                    <div class="avatar"><i class="fas fa-smile"></i></div>
-                    <div class="avatar"><i class="fas fa-smile"></i></div>
+
+            <div class="card" style="margin-top:20px">
+                <h3><i class="far fa-comment-dots"></i> 最感动的一句话</h3>
+                <div style="padding:20px; text-align:center; font-size:1.2rem; font-style:italic; line-height:1.6">
+                    "不管未来发生什么，我都会坚定地选择你，因为你是我生命中最重要的决定。"
                 </div>
-                
-                <div class="final-message">
-                    <h3>给未来的我们</h3>
-                    <p style="margin: 20px 0;">一起走过的365天只是开始，未来的路还很长。愿我们继续携手，走过每一个春夏秋冬，共同创造更多美好的回忆。</p>
-                    <p style="font-weight: 500; color: #ff6b6b;">爱你的每一天，都是情人节 ❤</p>
-                </div>
-                
-                <button class="btn" id="generateBtn">
-                    <i class="fas fa-heart"></i> 生成恋爱海报
-                </button>
+                <div style="text-align:right; color:#777">—— 2023年9月12日 00:23</div>
             </div>
-            
-            <footer>
-                <p>制作于 2024年6月15日 · 纪念我们的第一个周年</p>
-                <p>真爱永恒 · 此报告仅属于张伟和李芳</p>
-            </footer>
+        </div>
+
+        <!-- 照片墙 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-camera-retro"></i>
+                <h2>甜蜜瞬间回顾</h2>
+            </div>
+
+            <div class="photo-grid">
+                <div class="photo-item"><i class="fas fa-mountain"></i></div>
+                <div class="photo-item"><i class="fas fa-umbrella-beach"></i></div>
+                <div class="photo-item"><i class="fas fa-birthday-cake"></i></div>
+                <div class="photo-item"><i class="fas fa-snowman"></i></div>
+                <div class="photo-item"><i class="fas fa-dog"></i></div>
+                <div class="photo-item"><i class="fas fa-star"></i></div>
+            </div>
+        </div>
+
+        <!-- 互动部分 -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-feather-alt"></i>
+                <h2>爱的互动</h2>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-heart"></i> 你在我心中是_____分</h3>
+                <div style="text-align:center; margin:20px 0">
+                    <div style="font-size:4rem; color:#ff758c; line-height:1">100</div>
+                    <div style="font-size:1.2rem">（满分100分）</div>
+                    <div style="margin-top:15px">因为你是我的百分之百女孩</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:20px">
+                <h3><i class="fas fa-pen-fancy"></i> 写给对方的一句话</h3>
+                <div style="padding:20px; text-align:center; font-size:1.2rem; min-height:100px; display:flex; align-items:center; justify-content:center">
+                    感谢你出现在我的生命里，让我的每一天都充满阳光和希望。我爱你，现在和未来。
+                </div>
+            </div>
+
+            <div class="wish-wall">
+                <div class="wish-card">
+                    <h4>未来心愿墙</h4>
+                    <p>希望明年能一起去日本看樱花</p>
+                </div>
+                <div class="wish-card">
+                    <h4>共同目标</h4>
+                    <p>一起学习新技能：烘焙和摄影</p>
+                </div>
+                <div class="wish-card">
+                    <h4>爱的承诺</h4>
+                    <p>每年至少两次长途旅行</p>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:30px">
+                <button class="share-btn">生成专属报告 & 分享</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>2024年 恋爱年度报告</p>
+            <p>愿这份报告成为我们爱情旅程的美好见证</p>
+            <p>❤️ 爱在当下，期许未来 ❤️</p>
         </div>
     </div>
-    
+
+    <!-- 图片模态框 -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
     <script>
-        // 生成漂浮爱心
-        function createFloatingHearts() {
-            const container = document.querySelector('.page');
-            const heartCount = 15;
-            
+        // 创建漂浮的心形
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 30;
+
             for (let i = 0; i < heartCount; i++) {
                 const heart = document.createElement('div');
-                heart.classList.add('floating-heart');
+                heart.classList.add('heart');
                 heart.innerHTML = '❤';
-                
+
                 // 随机位置
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
-                
-                heart.style.left = `${left}%`;
-                heart.style.top = `${top}%`;
-                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+
                 // 随机大小
-                const size = 15 + Math.random() * 20;
-                heart.style.fontSize = `${size}px`;
-                
+                const size = Math.random() * 10 + 10;
+                heart.style.fontSize = size + 'px';
+
                 // 随机动画延迟
-                const delay = Math.random() * 5;
-                heart.style.animationDelay = `${delay}s`;
-                
+                heart.style.animationDelay = Math.random() * 5 + 's';
+
                 container.appendChild(heart);
             }
         }
-        
-        // 生成五彩纸屑效果
-        function createConfetti() {
-            const colors = ['#ff6b6b', '#ff8e8e', '#ffb6b6', '#ffd9d9', '#ff9a9e', '#fad0c4'];
-            const container = document.body;
-            
-            for (let i = 0; i < 100; i++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                
-                // 随机颜色
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.backgroundColor = color;
-                
-                // 随机大小
-                const size = 5 + Math.random() * 10;
-                confetti.style.width = `${size}px`;
-                confetti.style.height = `${size}px`;
-                
-                // 随机位置
-                const startX = Math.random() * window.innerWidth;
-                confetti.style.left = `${startX}px`;
-                
-                // 随机动画时长
-                const duration = 2 + Math.random() * 3;
-                confetti.style.animationDuration = `${duration}s`;
-                
-                container.appendChild(confetti);
-                
-                // 动画结束后移除元素
-                setTimeout(() => {
-                    confetti.remove();
-                }, duration * 1000);
-            }
+
+        // 初始化图表
+        function initCharts() {
+            // 月互动趋势图
+            const ctx = document.getElementById('monthlyChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    datasets: [{
+                        label: '每月互动指数',
+                        data: [82, 85, 88, 90, 92, 95, 96, 98, 97, 95, 93, 96],
+                        borderColor: '#ff758c',
+                        backgroundColor: 'rgba(255, 117, 140, 0.1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#ff758c',
+                        pointRadius: 5,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#333',
+                            bodyColor: '#666',
+                            borderColor: '#ffafbd',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 80,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
         }
-        
-        // 点击按钮生成五彩纸屑
-        document.getElementById('generateBtn').addEventListener('click', function() {
-            createConfetti();
-            
-            // 按钮动画
-            this.innerHTML = '<i class="fas fa-check"></i> 海报生成中...';
-            this.style.background = 'linear-gradient(45deg, #4CAF50, #8BC34A)';
-            
-            setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-heart"></i> 海报已保存';
-                setTimeout(() => {
-                    this.innerHTML = '<i class="fas fa-heart"></i> 生成恋爱海报';
-                    this.style.background = 'linear-gradient(45deg, #ff6b6b, #ff8e8e)';
-                }, 2000);
-            }, 1500);
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            createHearts();
+            initCharts();
+
+            // 图片模态框功能
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.close');
+
+            document.querySelectorAll('.photo-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    modal.style.display = 'flex';
+                    // 这里应该显示实际图片，目前用占位符
+                    modalImg.src = 'https://via.placeholder.com/600x400/ffafbd/ffffff?text=Our+Sweet+Memory';
+                });
+            });
+
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // 分享按钮动画
+            const shareBtn = document.querySelector('.share-btn');
+            shareBtn.addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-check"></i> 已生成，快去分享吧！';
+                this.style.background = 'linear-gradient(to right, #6a11cb, #2575fc)';
+
+                // 创建爱心动画
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.style.position = 'fixed';
+                heart.style.fontSize = '30px';
+                heart.style.color = '#ff758c';
+                heart.style.zIndex = '1000';
+                heart.style.pointerEvents = 'none';
+                heart.style.left = shareBtn.getBoundingClientRect().left + shareBtn.offsetWidth/2 + 'px';
+                heart.style.top = shareBtn.getBoundingClientRect().top + 'px';
+                heart.style.transform = 'translate(-50%, -50%)';
+                document.body.appendChild(heart);
+
+                // 动画
+                const animation = heart.animate([
+                    { top: shareBtn.getBoundingClientRect().top + 'px', opacity: 1 },
+                    { top: shareBtn.getBoundingClientRect().top - 100 + 'px', opacity: 0 }
+                ], {
+                    duration: 1500,
+                    easing: 'ease-out'
+                });
+
+                animation.onfinish = () => {
+                    heart.remove();
+                };
+            });
         });
-        
-        // 页面加载时创建漂浮爱心
-        window.addEventListener('load', createFloatingHearts);
     </script>
 </body>
 </html>
